@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>强制清除工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+        button {
+            padding: 12px 24px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .primary:hover {
+            background-color: #0069d9;
+        }
+        .danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .danger:hover {
+            background-color: #c82333;
+        }
+        .secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        .secondary:hover {
+            background-color: #5a6268;
+        }
+        .key-list {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+        .key-item {
+            padding: 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .key-item:last-child {
+            border-bottom: none;
+        }
+        .key-name {
+            font-weight: bold;
+        }
+        .key-size {
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 强制清除localStorage工具</h1>
+        
+        <div class="status info">
+            <h3>功能说明：</h3>
+            <p>此工具用于强制清除浏览器localStorage中的股票数据，确保数据被完全删除。</p>
+            <p><strong>警告：</strong>此操作将删除所有localStorage数据，包括但不限于股票数据。</p>
+        </div>
+        
+        <div class="status info">
+            <h3>当前localStorage状态：</h3>
+            <div id="storageStatus">
+                <p>点击下方按钮检查存储状态...</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="primary" onclick="checkStorage()">📋 检查存储状态</button>
+            <button class="danger" onclick="forceClear()">🗑️ 强制清除所有数据</button>
+            <button class="secondary" onclick="resetApp()">🔄 重置应用</button>
+        </div>
+        
+        <div id="operationResult" class="status" style="display: none;"></div>
+        
+        <div class="status info">
+            <h3>操作步骤：</h3>
+            <ol>
+                <li>点击「检查存储状态」查看当前localStorage中的数据</li>
+                <li>点击「强制清除所有数据」删除所有localStorage数据</li>
+                <li>点击「重置应用」打开应用首页</li>
+                <li>在应用中重新导入股票数据</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // 检查localStorage状态
+        function checkStorage() {
+            const storageStatus = document.getElementById('storageStatus');
+            const operationResult = document.getElementById('operationResult');
+            
+            try {
+                // 检查localStorage是否可用
+                if (typeof localStorage === 'undefined') {
+                    storageStatus.innerHTML = '<p>❌ localStorage不可用</p>';
+                    return;
+                }
+                
+                // 获取所有键
+                const keys = Object.keys(localStorage);
+                
+                if (keys.length === 0) {
+                    storageStatus.innerHTML = '<p>✅ localStorage为空</p>';
+                } else {
+                    let html = `<p>找到 ${keys.length} 个键：</p><div class="key-list">`;
+                    
+                    keys.forEach(key => {
+                        const value = localStorage.getItem(key);
+                        const size = value ? value.length : 0;
+                        html += `<div class="key-item">
+                            <span class="key-name">${key}</span>
+                            <span class="key-size"> (${size} 字符)</span>
+                        </div>`;
+                    });
+                    
+                    html += '</div>';
+                    storageStatus.innerHTML = html;
+                }
+                
+                // 显示操作结果
+                operationResult.innerHTML = '<p>✅ 检查完成</p>';
+                operationResult.className = 'status success';
+                operationResult.style.display = 'block';
+                
+            } catch (error) {
+                storageStatus.innerHTML = `<p>❌ 检查失败：${error.message}</p>`;
+                operationResult.innerHTML = `<p>❌ 检查失败：${error.message}</p>`;
+                operationResult.className = 'status error';
+                operationResult.style.display = 'block';
+            }
+        }
+        
+        // 强制清除所有数据
+        function forceClear() {
+            const operationResult = document.getElementById('operationResult');
+            
+            // 确认操作
+            if (!confirm('⚠️ 确定要清除所有localStorage数据吗？此操作无法撤销！')) {
+                return;
+            }
+            
+            try {
+                // 检查localStorage是否可用
+                if (typeof localStorage === 'undefined') {
+                    operationResult.innerHTML = '<p>❌ localStorage不可用</p>';
+                    operationResult.className = 'status error';
+                    operationResult.style.display = 'block';
+                    return;
+                }
+                
+                // 记录清除前的键数量
+                const beforeCount = Object.keys(localStorage).length;
+                
+                // 方法1：使用clear()
+                localStorage.clear();
+                
+                // 方法2：逐个删除（作为备份）
+                const keys = Object.keys(localStorage);
+                keys.forEach(key => {
+                    localStorage.removeItem(key);
+                });
+                
+                // 记录清除后的键数量
+                const afterCount = Object.keys(localStorage).length;
+                
+                // 验证清除结果
+                if (afterCount === 0) {
+                    operationResult.innerHTML = `<p>✅ 清除成功！删除了 ${beforeCount} 个键。</p>`;
+                    operationResult.className = 'status success';
+                } else {
+                    operationResult.innerHTML = `<p>⚠️ 清除不完全！还有 ${afterCount} 个键未删除。</p>`;
+                    operationResult.className = 'status error';
+                }
+                
+                operationResult.style.display = 'block';
+                
+                // 重新检查状态
+                setTimeout(checkStorage, 1000);
+                
+            } catch (error) {
+                operationResult.innerHTML = `<p>❌ 清除失败：${error.message}</p>`;
+                operationResult.className = 'status error';
+                operationResult.style.display = 'block';
+            }
+        }
+        
+        // 重置应用
+        function resetApp() {
+            // 打开应用首页
+            window.open('http://localhost:3000/', '_blank');
+        }
+        
+        // 页面加载时自动检查
+        window.onload = function() {
+            setTimeout(checkStorage, 500);
+        };
+    </script>
+</body>
+</html>

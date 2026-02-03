@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>检查localStorage数据</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .stock { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }
+        .code { font-family: monospace; }
+        .records { margin-left: 20px; }
+        .record { border-left: 3px solid #ccc; padding-left: 10px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>localStorage股票数据</h1>
+    <div id="result"></div>
+    
+    <script>
+        try {
+            const data = localStorage.getItem('stock_tracker_db_v4_final');
+            if (data) {
+                const stocks = JSON.parse(data);
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `<h2>股票数量: ${stocks.length}</h2>`;
+                
+                stocks.forEach((stock, index) => {
+                    const stockDiv = document.createElement('div');
+                    stockDiv.className = 'stock';
+                    stockDiv.innerHTML = `
+                        <h3>${index + 1}. ${stock.name}</h3>
+                        <p>代码: <span class="code">${stock.code}</span></p>
+                        <p>价格: ${stock.price}</p>
+                        <p>涨幅: ${stock.dailyChange}</p>
+                        <p>市值: ${stock.marketCap}</p>
+                        <p>市盈率: ${stock.peRatio}</p>
+                        <p>研报数量: ${stock.records.length}</p>
+                        <div class="records">
+                            ${stock.records.map((record, i) => `
+                                <div class="record">
+                                    <p><strong>研报 ${i + 1}:</strong> ${record.title}</p>
+                                    <p>stockId: ${record.stockId}</p>
+                                    <p>日期: ${record.customDate || record.timestamp}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    resultDiv.appendChild(stockDiv);
+                });
+            } else {
+                document.getElementById('result').innerHTML = '<p>localStorage中没有股票数据</p>';
+            }
+        } catch (error) {
+            document.getElementById('result').innerHTML = `<p>错误: ${error.message}</p>`;
+        }
+    </script>
+</body>
+</html>

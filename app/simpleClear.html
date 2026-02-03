@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>简单清除工具</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        .status { padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>简单清除localStorage工具</h1>
+    
+    <div class="status info">
+        <h3>当前localStorage状态：</h3>
+        <div id="currentState"></div>
+    </div>
+    
+    <button onclick="checkStorage()">检查存储</button>
+    <button onclick="clearStorage()">清除存储</button>
+    <button onclick="refreshPage()">刷新页面</button>
+    
+    <div id="status" class="status"></div>
+    
+    <script>
+        function checkStorage() {
+            const statusDiv = document.getElementById('status');
+            const currentStateDiv = document.getElementById('currentState');
+            
+            try {
+                // 检查所有localStorage键
+                const allKeys = Object.keys(localStorage);
+                
+                if (allKeys.length > 0) {
+                    let html = '<p>找到 ' + allKeys.length + ' 个键：</p><ul>';
+                    
+                    allKeys.forEach(key => {
+                        const value = localStorage.getItem(key);
+                        const length = value ? value.length : 0;
+                        html += '<li><strong>' + key + '</strong> (' + length + ' 字符)</li>';
+                    });
+                    
+                    html += '</ul>';
+                    currentStateDiv.innerHTML = html;
+                    
+                    statusDiv.innerHTML = '<p>✅ 检查完成</p>';
+                    statusDiv.className = 'status success';
+                } else {
+                    currentStateDiv.innerHTML = '<p>localStorage为空</p>';
+                    statusDiv.innerHTML = '<p>✅ 检查完成</p>';
+                    statusDiv.className = 'status success';
+                }
+            } catch (error) {
+                currentStateDiv.innerHTML = '<p>错误：' + error.message + '</p>';
+                statusDiv.innerHTML = '<p>❌ 检查失败</p>';
+                statusDiv.className = 'status error';
+            }
+        }
+        
+        function clearStorage() {
+            const statusDiv = document.getElementById('status');
+            
+            if (!confirm('确定要清除所有localStorage数据吗？')) {
+                return;
+            }
+            
+            try {
+                // 清除所有数据
+                localStorage.clear();
+                
+                statusDiv.innerHTML = '<p>✅ 所有数据已清除</p>';
+                statusDiv.className = 'status success';
+                
+                // 重新检查状态
+                setTimeout(checkStorage, 500);
+            } catch (error) {
+                statusDiv.innerHTML = '<p>❌ 清除失败：' + error.message + '</p>';
+                statusDiv.className = 'status error';
+            }
+        }
+        
+        function refreshPage() {
+            location.reload();
+        }
+        
+        // 页面加载时检查
+        window.onload = checkStorage;
+    </script>
+</body>
+</html>

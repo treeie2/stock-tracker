@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除股票数据</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .info {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .clear-btn {
+            background: #ef4444;
+            color: white;
+        }
+        .clear-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+        .refresh-btn {
+            background: #10b981;
+            color: white;
+        }
+        .refresh-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #b8dbac;
+        }
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        .data-preview {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .data-preview h3 {
+            margin: 0 0 10px 0;
+            color: #495057;
+            font-size: 14px;
+        }
+        .stock-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 12px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ 清除股票数据</h1>
+        <div class="info">
+            此页面用于清除localStorage中的股票数据，以便重新导入文件。
+            <br><br>
+            <strong>⚠️ 警告：</strong>此操作将删除所有股票数据和研报记录，且无法撤销！
+        </div>
+        
+        <div class="button-group">
+            <button class="clear-btn" onclick="clearData()">
+                🗑️ 清除所有股票数据
+            </button>
+            <button class="refresh-btn" onclick="refreshPage()">
+                🔄 刷新应用页面
+            </button>
+        </div>
+        
+        <div id="status"></div>
+        
+        <div id="dataPreview" class="data-preview" style="display: none;">
+            <h3>当前数据预览：</h3>
+            <div id="stockList"></div>
+        </div>
+    </div>
+    
+    <script>
+        function showPreview() {
+            const data = localStorage.getItem('stock_tracker_db_v4_final');
+            const previewDiv = document.getElementById('dataPreview');
+            const stockListDiv = document.getElementById('stockList');
+            const statusDiv = document.getElementById('status');
+            
+            if (data) {
+                try {
+                    const stocks = JSON.parse(data);
+                    previewDiv.style.display = 'block';
+                    stockListDiv.innerHTML = stocks.map((stock, index) => 
+                        `<div class="stock-item">${index + 1}. ${stock.name} (${stock.code}) - ${stock.records.length}条研报</div>`
+                    ).join('');
+                } catch (error) {
+                    showStatus('数据解析失败', 'error');
+                }
+            } else {
+                previewDiv.style.display = 'none';
+                showStatus('localStorage中没有股票数据', 'success');
+            }
+        }
+        
+        function clearData() {
+            if (!confirm('确定要清除所有股票数据吗？此操作无法撤销！')) {
+                showStatus('⚠️ 用户取消了操作', 'error');
+                return;
+            }
+            
+            try {
+                showStatus('⏳ 正在清除数据...', 'success');
+                
+                // 清除股票数据
+                localStorage.removeItem('stock_tracker_db_v4_final');
+                
+                // 检查是否还有其他相关键
+                const allKeys = Object.keys(localStorage);
+                const stockKeys = allKeys.filter(key => key.includes('stock') || key.includes('Stock'));
+                
+                if (stockKeys.length > 0) {
+                    stockKeys.forEach(key => {
+                        localStorage.removeItem(key);
+                    });
+                    showStatus(`✅ 数据已清除成功！同时清除了 ${stockKeys.length} 个相关键`, 'success');
+                } else {
+                    showStatus('✅ 数据已清除成功！', 'success');
+                }
+                
+                setTimeout(() => {
+                    showPreview();
+                }, 500);
+            } catch (error) {
+                showStatus('❌ 清除数据失败: ' + error.message, 'error');
+                console.error('清除数据失败:', error);
+            }
+        }
+        
+        function refreshPage() {
+            showStatus('⏳ 正在刷新页面...', 'success');
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3000/';
+            }, 1000);
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = 'status ' + type;
+            statusDiv.innerHTML = message;
+        }
+        
+        // 页面加载时显示数据预览
+        window.onload = function() {
+            showPreview();
+        };
+    </script>
+</body>
+</html>
