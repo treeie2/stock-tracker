@@ -1,0 +1,51 @@
+{
+  "channel": {
+    "title": "股票研报RSS",
+    "link": "https://stock-tracker-seven-blush.vercel.app",
+    "description": "微信公众号股票研报RSS订阅",
+    "lastBuildDate": "2026-02-09T10:00:00Z"
+  },
+  "articles": [
+    {
+      "title": "兴图新科：军工信息化龙头，业绩持续高增长",
+      "link": "https://mp.weixin.qq.com/s/example1",
+      "description": "兴图新科作为军工信息化领域的龙头企业，受益于国防现代化建设，业绩持续高增长...",
+      "pub_date": "2026-02-09T08:00:00Z",
+      "source": "caixinjingwei",
+      "fetch_time": "2026-02-09T10:00:00Z"
+    },
+    {
+      "title": "中际旭创：光模块龙头，AI算力需求爆发",
+      "link": "https://mp.weixin.qq.com/s/example2",
+      "description": "中际旭创作为全球光模块龙头，受益于AI算力需求爆发，订单持续增长...",
+      "pub_date": "2026-02-09T09:00:00Z",
+      "source": "emnews",
+      "fetch_time": "2026-02-09T10:00:00Z"
+    },
+    {
+      "title": "宁德时代：动力电池龙头，技术领先优势明显",
+      "link": "https://mp.weixin.qq.com/s/example3",
+      "description": "宁德时代作为全球动力电池龙头，技术领先优势明显，市场份额持续提升...",
+      "pub_date": "2026-02-09T07:00:00Z",
+      "source": "gfresearch",
+      "fetch_time": "2026-02-09T10:00:00Z"
+    },
+    {
+      "title": "比亚迪：新能源汽车龙头，海外市场拓展顺利",
+      "link": "https://mp.weixin.qq.com/s/example4",
+      "description": "比亚迪作为新能源汽车龙头，海外市场拓展顺利，销量持续增长...",
+      "pub_date": "2026-02-09T06:00:00Z",
+      "source": "hxzqyj",
+      "fetch_time": "2026-02-09T10:00:00Z"
+    },
+    {
+      "title": "贵州茅台：白酒龙头，品牌价值持续提升",
+      "link": "https://mp.weixin.qq.com/s/example5",
+      "description": "贵州茅台作为白酒龙头，品牌价值持续提升，业绩稳健增长...",
+      "pub_date": "2026-02-09T05:00:00Z",
+      "source": "ChinaMerchantsSecuritiesResearch",
+      "fetch_time": "2026-02-09T10:00:00Z"
+    }
+  ],
+  "count": 5
+}

@@ -1,0 +1,377 @@
+[
+  {
+    "stockName": "宁德时代",
+    "stockCode": "300750",
+    "title": "【宁德时代】2025年Q1业绩超预期",
+    "logic": "全球动力电池龙头，储能业务高速增长。",
+    "date": "2025.02.09",
+    "sector": "新能源",
+    "concepts": [
+      "动力电池",
+      "储能"
+    ],
+    "targetValuation": "PE 25倍",
+    "dataPoints": []
+  },
+  {
+    "stockName": "众兴菌业",
+    "stockCode": "002772",
+    "title": "食用菌景气上行，关注冬虫夏草成长性",
+    "logic": "食用菌减产，价格上涨，行业景气回升。众兴菌业推进工厂化培育冬虫夏草项目，有望受益行业发展。",
+    "date": "",
+    "sector": "农业",
+    "concepts": [
+      "食用菌",
+      "冬虫夏草"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "2026年1月金针菇批发均价",
+        "value": "约5.9元/kg"
+      },
+      {
+        "label": "2月5日寿光金针菇均价",
+        "value": "约8.5元/kg"
+      },
+      {
+        "label": "2026年1月双孢菇批发均价",
+        "value": "约16.5元/kg"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "雪榕生物",
+    "stockCode": "300511",
+    "title": "食用菌景气上行，关注冬虫夏草成长性",
+    "logic": "食用菌行业景气回升，雪榕生物作为行业龙头，有望凭借规模、技术等优势获超额盈利。",
+    "date": "",
+    "sector": "农业",
+    "concepts": [
+      "食用菌"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "2026年1月金针菇批发均价",
+        "value": "约5.9元/kg"
+      },
+      {
+        "label": "2月5日寿光金针菇均价",
+        "value": "约8.5元/kg"
+      },
+      {
+        "label": "2026年1月双孢菇批发均价",
+        "value": "约16.5元/kg"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "北稀",
+    "stockCode": "",
+    "title": "【稀土】再call镨钕目标价100万",
+    "logic": "稀土供改生效，需求有弹性，镨钕目标价100万。北稀估值有提升空间，价格达100万时空间100％。",
+    "date": "",
+    "sector": "有色金属",
+    "concepts": [
+      "稀土"
+    ],
+    "targetValuation": "100万镨钕价格对应17x，复盘高点30x，空间100％",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "中稀有色",
+    "stockCode": "600259",
+    "title": "【稀土】再call镨钕目标价100万",
+    "logic": "稀土供需、估值等预期加强，中稀有色考虑注入空间和红岭钨矿，上涨空间50 - 100％。",
+    "date": "",
+    "sector": "有色金属",
+    "concepts": [
+      "稀土"
+    ],
+    "targetValuation": "空间50 - 100％",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "中国稀土",
+    "stockCode": "000831",
+    "title": "【稀土】再call镨钕目标价100万",
+    "logic": "稀土行情向好，26年解决同业竞争，中国稀土理论赔率最大。",
+    "date": "",
+    "sector": "有色金属",
+    "concepts": [
+      "稀土"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "盛和资源",
+    "stockCode": "600392",
+    "title": "【稀土】再call镨钕目标价100万",
+    "logic": "稀土供改和需求驱动下，盛和资源业绩释放和筹码结构佳。",
+    "date": "",
+    "sector": "有色金属",
+    "concepts": [
+      "稀土"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "江丰电子",
+    "stockCode": "300666",
+    "title": "靶材：涨价趋势渐成，有望持续演绎",
+    "logic": "AI带动靶材需求，供给受限，提价或持续。江丰电子半导体靶材市占率高，受益先进制程/存储成长。",
+    "date": "",
+    "sector": "半导体",
+    "concepts": [
+      "靶材",
+      "半导体",
+      "AI"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "有研新材",
+    "stockCode": "600206",
+    "title": "靶材：涨价趋势渐成，有望持续演绎",
+    "logic": "靶材需求增长，提价预期强。有研新材靶材产品丰富，客户优质，有望受益。",
+    "date": "",
+    "sector": "半导体",
+    "concepts": [
+      "靶材",
+      "半导体"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "阿石创",
+    "stockCode": "300706",
+    "title": "靶材：涨价趋势渐成，有望持续演绎",
+    "logic": "靶材行业发展向好，阿石创是面板靶材头部供应商，半导体靶材也有销售。",
+    "date": "",
+    "sector": "半导体",
+    "concepts": [
+      "靶材",
+      "半导体",
+      "面板"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "欧莱新材",
+    "stockCode": "688530",
+    "title": "靶材：涨价趋势渐成，有望持续演绎",
+    "logic": "靶材提价预期强，欧莱新材靶材供货全世代线，切入半导体供应体系。",
+    "date": "",
+    "sector": "半导体",
+    "concepts": [
+      "靶材",
+      "半导体"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "隆华科技",
+    "stockCode": "300263",
+    "title": "靶材：涨价趋势渐成，有望持续演绎",
+    "logic": "靶材市场发展，隆华科技在光伏和半导体领域布局靶材产品。",
+    "date": "",
+    "sector": "半导体",
+    "concepts": [
+      "靶材",
+      "半导体",
+      "光伏"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "浙江龙盛",
+    "stockCode": "600352",
+    "title": "【燃料涨价】",
+    "logic": "浙江龙盛上调分散染料出厂报价，行业格局优，有定价权，染料价格上涨潜在空间大。",
+    "date": "",
+    "sector": "化工",
+    "concepts": [
+      "染料"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "2月8日分散染料出厂报价上调幅度",
+        "value": "2000元/吨"
+      },
+      {
+        "label": "分散染料+活性合计产能",
+        "value": "20万吨左右"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "闰土股份",
+    "stockCode": "002440",
+    "title": "【燃料涨价】",
+    "logic": "染料行业格局优化，闰土股份有一定产能，有望受益染料价格上涨。",
+    "date": "",
+    "sector": "化工",
+    "concepts": [
+      "染料"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "分散染料年产能",
+        "value": "11.8万吨"
+      },
+      {
+        "label": "活性染料年产能",
+        "value": "10万吨"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "吉华集团",
+    "stockCode": "603980",
+    "title": "【燃料涨价】",
+    "logic": "染料价格上涨，吉华集团有产能，或受益行业发展。",
+    "date": "",
+    "sector": "化工",
+    "concepts": [
+      "染料"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "分散染料年产能",
+        "value": "7.5万吨"
+      },
+      {
+        "label": "活性染料年产能",
+        "value": "2万吨"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "联德股份",
+    "stockCode": "605060",
+    "title": "个股信息汇总",
+    "logic": "卡特高管审厂，天然气发电机组扩产，若铸件价格提升，有望再造一个联德。",
+    "date": "",
+    "sector": "制造业",
+    "concepts": [
+      "天然气发电",
+      "铸件"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "现有一台铸件价格",
+        "value": "20万"
+      },
+      {
+        "label": "未来一台铸件预计价格",
+        "value": "40 - 50万"
+      },
+      {
+        "label": "天然气发电机组扩产数量",
+        "value": "3000台"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "家联科技",
+    "stockCode": "301193",
+    "title": "个股信息汇总",
+    "logic": "26年3D打印或二次加速，家联科技切入拓竹耗材供应链，产能扩张有望贡献增量。",
+    "date": "",
+    "sector": "制造业",
+    "concepts": [
+      "3D打印",
+      "耗材"
+    ],
+    "targetValuation": "",
+    "dataPoints": [],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "海翔药业",
+    "stockCode": "002099",
+    "title": "关注正在暴涨的活性艳兰19",
+    "logic": "活性艳蓝19价格暴涨，供不应求，海翔市占率75%，且回购股票彰显信心。",
+    "date": "",
+    "sector": "医药生物",
+    "concepts": [
+      "染料",
+      "医药"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "活性艳蓝19最新价格",
+        "value": "18万"
+      },
+      {
+        "label": "活性艳蓝19最新提价幅度",
+        "value": "3万"
+      },
+      {
+        "label": "海翔药业市占率",
+        "value": "75%"
+      },
+      {
+        "label": "海翔药业回购承诺金额",
+        "value": "1.5亿元以上"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  },
+  {
+    "stockName": "航民股份",
+    "stockCode": "600987",
+    "title": "【航民股份】染料价格大涨，节后染费价格必涨",
+    "logic": "染料价格涨，印染旺季染费或涨，航民是印染龙头，预计净利润弹性大。",
+    "date": "",
+    "sector": "纺织印染",
+    "concepts": [
+      "印染",
+      "染料"
+    ],
+    "targetValuation": "",
+    "dataPoints": [
+      {
+        "label": "年加工规模",
+        "value": "10.2亿米"
+      },
+      {
+        "label": "假设染费春节后上涨幅度",
+        "value": "20%"
+      },
+      {
+        "label": "目前分散黑上涨幅度",
+        "value": "12%"
+      }
+    ],
+    "sourceUrl": "https://mp.weixin.qq.com/s/3hve6RTHGckV0Uwkp4jkyA"
+  }
+]
