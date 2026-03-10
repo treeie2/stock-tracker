@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除所有数据</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        .warning {
+            background: #ffebee;
+            border-left: 4px solid #d32f2f;
+            padding: 15px;
+            margin: 20px 0;
+            color: #d32f2f;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .clear-btn {
+            background: #d32f2f;
+            color: white;
+        }
+        .clear-btn:hover {
+            background: #b71c1c;
+        }
+        .back-btn {
+            background: #1976d2;
+            color: white;
+        }
+        .back-btn:hover {
+            background: #1565c0;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+        }
+        .error {
+            background: #ffebee;
+            border: 1px solid #d32f2f;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚠️ 清除所有数据</h1>
+        
+        <div class="warning">
+            <strong>警告：</strong>此操作将永久删除所有本地存储的股票数据，包括：
+            <ul>
+                <li>localStorage中的所有数据</li>
+                <li>IndexedDB中的所有数据</li>
+                <li>所有股票记录和研报信息</li>
+            </ul>
+            <p>此操作不可恢复，请确保已备份重要数据！</p>
+        </div>
+        
+        <button class="clear-btn" onclick="clearAllData()">确认清除所有数据</button>
+        <button class="back-btn" onclick="goBack()">返回应用</button>
+        
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function clearAllData() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            try {
+                // 1. 清除 localStorage
+                const localStorageKeys = Object.keys(localStorage);
+                localStorageKeys.forEach(key => {
+                    localStorage.removeItem(key);
+                });
+                console.log(`已清除 ${localStorageKeys.length} 个 localStorage 项`);
+                
+                // 2. 清除 IndexedDB
+                const databases = await window.indexedDB.databases();
+                for (const db of databases) {
+                    if (db.name) {
+                        await new Promise((resolve, reject) => {
+                            const request = window.indexedDB.deleteDatabase(db.name);
+                            request.onsuccess = () => {
+                                console.log(`已删除数据库: ${db.name}`);
+                                resolve();
+                            };
+                            request.onerror = () => {
+                                console.error(`删除数据库失败: ${db.name}`);
+                                reject();
+                            };
+                        });
+                    }
+                }
+                
+                // 3. 清除 sessionStorage
+                sessionStorage.clear();
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `
+                    <strong>✅ 清除成功！</strong><br>
+                    已清除 ${localStorageKeys.length} 个 localStorage 项<br>
+                    已清除 ${databases.length} 个 IndexedDB 数据库<br>
+                    所有数据已被永久删除
+                `;
+                
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `<strong>❌ 清除失败：</strong><br>${error.message}`;
+            }
+        }
+        
+        function goBack() {
+            window.location.href = 'http://localhost:3001/';
+        }
+    </script>
+</body>
+</html>

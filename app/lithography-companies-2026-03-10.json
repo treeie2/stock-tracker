@@ -1,0 +1,846 @@
+{
+  "stocks": [
+    {
+      "name": "圣泉集团",
+      "code": "605589",
+      "concepts": ["光刻胶树脂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_圣泉集团_0",
+          "stockId": "s_圣泉集团",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "圣泉集团 - 光刻胶相关业务",
+          "content": "生产的ppb级的高纯线性酚醛树脂可作为光刻胶中的主成膜物。",
+          "logic": "生产的ppb级的高纯线性酚醛树脂可作为光刻胶中的主成膜物。",
+          "dataPoints": [],
+          "rawText": "圣泉集团：#树脂，#国产替代 生产的ppb级的高纯线性酚醛树脂可作为光刻胶中的主成膜物。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "兴业股份",
+      "code": "603928",
+      "concepts": ["光刻胶树脂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_兴业股份_1",
+          "stockId": "s_兴业股份",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "兴业股份 - 光刻胶相关业务",
+          "content": "已研发成功半导体光刻胶用酚醛树脂等新材料。",
+          "logic": "已研发成功半导体光刻胶用酚醛树脂等新材料。",
+          "dataPoints": [],
+          "rawText": "兴业股份：#树脂，#国产替代 已研发成功半导体光刻胶用酚醛树脂等新材料。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "泰和科技",
+      "code": "300801",
+      "concepts": ["光刻胶树脂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_泰和科技_2",
+          "stockId": "s_泰和科技",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "泰和科技 - 光刻胶相关业务",
+          "content": "酚醛树脂产品主要用于配套G线和I线光刻胶。",
+          "logic": "酚醛树脂产品主要用于配套G线和I线光刻胶。",
+          "dataPoints": [],
+          "rawText": "泰和科技：#树脂，#国产替代 酚醛树脂产品主要用于配套G线和I线光刻胶。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "华懋科技",
+      "code": "603306",
+      "concepts": ["光刻胶单体", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_华懋科技_3",
+          "stockId": "s_华懋科技",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "华懋科技 - 光刻胶相关业务",
+          "content": "持有徐州博康29.704%股权，可生产中高端光刻胶单体。",
+          "logic": "持有徐州博康29.704%股权，可生产中高端光刻胶单体。",
+          "dataPoints": [],
+          "rawText": "华懋科技：#光刻胶单体 #国产替代 持有徐州博康29.704%股权，可生产中高端光刻胶单体。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "东材科技",
+      "code": "601208",
+      "concepts": ["光刻胶单体", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_东材科技_4",
+          "stockId": "s_东材科技",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "东材科技 - 光刻胶相关业务",
+          "content": "与韩企共同投资的成都东凯芯半导体已开展高端光刻胶单体。",
+          "logic": "与韩企共同投资的成都东凯芯半导体已开展高端光刻胶单体。",
+          "dataPoints": [],
+          "rawText": "东材科技：#光刻胶单体 #国产替代 与韩企共同投资的成都东凯芯半导体已开展高端光刻胶单体。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "万润股份",
+      "code": "002643",
+      "concepts": ["光刻胶单体", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_万润股份_5",
+          "stockId": "s_万润股份",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "万润股份 - 光刻胶相关业务",
+          "content": "已销售的半导体光刻胶材料主要包括光刻胶单体、树脂、光酸。",
+          "logic": "已销售的半导体光刻胶材料主要包括光刻胶单体、树脂、光酸。",
+          "dataPoints": [],
+          "rawText": "万润股份：#光刻胶单体 #国产替代 已销售的半导体光刻胶材料主要包括光刻胶单体、树脂、光酸。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "瑞联新材",
+      "code": "688550",
+      "concepts": ["光刻胶单体", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_瑞联新材_6",
+          "stockId": "s_瑞联新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "瑞联新材 - 光刻胶相关业务",
+          "content": "产品涵盖半导体光刻胶单体、聚酰亚胺单体、膜材料单体等。",
+          "logic": "产品涵盖半导体光刻胶单体、聚酰亚胺单体、膜材料单体等。",
+          "dataPoints": [],
+          "rawText": "瑞联新材：#光刻胶单体 #国产替代 产品涵盖半导体光刻胶单体、聚酰亚胺单体、膜材料单体等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "强力新材",
+      "code": "300429",
+      "concepts": ["光引发剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_强力新材_7",
+          "stockId": "s_强力新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "强力新材 - 光刻胶相关业务",
+          "content": "主营业务是各类光刻胶专用电子化学品的研发、生产和销售。",
+          "logic": "主营业务是各类光刻胶专用电子化学品的研发、生产和销售。",
+          "dataPoints": [],
+          "rawText": "强力新材：#光引发剂 #国产替代 主营业务是各类光刻胶专用电子化学品的研发、生产和销售。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "扬帆新材",
+      "code": "300637",
+      "concepts": ["光引发剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_扬帆新材_8",
+          "stockId": "s_扬帆新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "扬帆新材 - 光刻胶相关业务",
+          "content": "主要从事光引发剂的研发、生产和销售。",
+          "logic": "主要从事光引发剂的研发、生产和销售。",
+          "dataPoints": [],
+          "rawText": "扬帆新材：#光引发剂 #国产替代 主要从事光引发剂的研发、生产和销售。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "久日新材",
+      "code": "688199",
+      "concepts": ["光引发剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_久日新材_9",
+          "stockId": "s_久日新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "久日新材 - 光刻胶相关业务",
+          "content": "主营业务是光引发剂、光刻胶的研发、生产和销售。",
+          "logic": "主营业务是光引发剂、光刻胶的研发、生产和销售。",
+          "dataPoints": [],
+          "rawText": "久日新材：#光引发剂 #国产替代 主营业务是光引发剂、光刻胶的研发、生产和销售。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "兴福电子",
+      "code": "688056",
+      "concepts": ["光引发剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_兴福电子_10",
+          "stockId": "s_兴福电子",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "兴福电子 - 光刻胶相关业务",
+          "content": "拟收购光刻胶用光引发剂制备专有技术及相关实验设备的所有权。",
+          "logic": "拟收购光刻胶用光引发剂制备专有技术及相关实验设备的所有权。",
+          "dataPoints": [],
+          "rawText": "兴福电子：#光引发剂 #国产替代 拟收购光刻胶用光引发剂制备专有技术及相关实验设备的所有权。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "华融化学",
+      "code": "301256",
+      "concepts": ["光刻胶溶剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_华融化学_11",
+          "stockId": "s_华融化学",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "华融化学 - 光刻胶相关业务",
+          "content": "从事湿电子化学品业务，包括光刻胶配套试剂等。",
+          "logic": "从事湿电子化学品业务，包括光刻胶配套试剂等。",
+          "dataPoints": [],
+          "rawText": "华融化学：#溶剂及配套试剂 #国产替代 从事湿电子化学品业务，包括光刻胶配套试剂等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "格林达",
+      "code": "603931",
+      "concepts": ["光刻胶溶剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_格林达_12",
+          "stockId": "s_格林达",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "格林达 - 光刻胶相关业务",
+          "content": "产品主要用于光刻胶的显影和剥离、电极的蚀刻等。",
+          "logic": "产品主要用于光刻胶的显影和剥离、电极的蚀刻等。",
+          "dataPoints": [],
+          "rawText": "格林达：#溶剂及配套试剂 #国产替代产品主要用于光刻胶的显影和剥离、电极的蚀刻等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "安集科技",
+      "code": "688019",
+      "concepts": ["光刻胶溶剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_安集科技_13",
+          "stockId": "s_安集科技",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "安集科技 - 光刻胶相关业务",
+          "content": "光刻胶去除剂包括集成电路制造用、晶圆级封装用等系列产品。",
+          "logic": "光刻胶去除剂包括集成电路制造用、晶圆级封装用等系列产品。",
+          "dataPoints": [],
+          "rawText": "安集科技：#溶剂及配套试剂 #国产替代 光刻胶去除剂包括集成电路制造用、晶圆级封装用等系列产品。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "江化微",
+      "code": "603078",
+      "concepts": ["光刻胶溶剂", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_江化微_14",
+          "stockId": "s_江化微",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "江化微 - 光刻胶相关业务",
+          "content": "湿电子化学品龙头企业，产品涵盖光刻胶配套试剂。",
+          "logic": "湿电子化学品龙头企业，产品涵盖光刻胶配套试剂。",
+          "dataPoints": [],
+          "rawText": "江化微：#溶剂及配套试剂 #国产替代 湿电子化学品龙头企业，产品涵盖光刻胶配套试剂。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "国风新材",
+      "code": "000859",
+      "concepts": ["PSPI光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_国风新材_15",
+          "stockId": "s_国风新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "国风新材 - 光刻胶相关业务",
+          "content": "公司在研产品包括光敏聚酰亚胺光刻胶，湿电子化学",
+          "logic": "公司在研产品包括光敏聚酰亚胺光刻胶，湿电子化学",
+          "dataPoints": [],
+          "rawText": "国风新材：#光敏性聚酰亚胺（PSPI）#国产替代 公司在研产品包括光敏聚酰亚胺光刻胶，湿电子化学"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "鼎龙股份",
+      "code": "300054",
+      "concepts": ["PSPI光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_鼎龙股份_16",
+          "stockId": "s_鼎龙股份",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "鼎龙股份 - 光刻胶相关业务",
+          "content": "已布局20余款KrFIArF光刻胶产品。",
+          "logic": "已布局20余款KrFIArF光刻胶产品。",
+          "dataPoints": [],
+          "rawText": "鼎龙股份：#光敏性聚酰亚胺（PSPI）#国产替代 已布局20余款KrFIArF光刻胶产品。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "广信材料",
+      "code": "300537",
+      "concepts": ["PSPI光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_广信材料_17",
+          "stockId": "s_广信材料",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "广信材料 - 光刻胶相关业务",
+          "content": "主营业务是光刻胶的研发、生产和销售。",
+          "logic": "主营业务是光刻胶的研发、生产和销售。",
+          "dataPoints": [],
+          "rawText": "广信材料：#光敏性聚酰亚胺（PSPI）#国产替代 主营业务是光刻胶的研发、生产和销售。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "彤程新材",
+      "code": "603650",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_彤程新材_18",
+          "stockId": "s_彤程新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "彤程新材 - 光刻胶相关业务",
+          "content": "公司krf光刻胶和arf光刻胶在国内技术水平领先。",
+          "logic": "公司krf光刻胶和arf光刻胶在国内技术水平领先。",
+          "dataPoints": [],
+          "rawText": "彤程新材：#半导体光刻胶产品 #国产替代 公司krf光刻胶和arf光刻胶在国内技术水平领先。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "南大光电",
+      "code": "300346",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_南大光电_19",
+          "stockId": "s_南大光电",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "南大光电 - 光刻胶相关业务",
+          "content": "通过控股子公司专注ArF光刻胶的研发与生产。",
+          "logic": "通过控股子公司专注ArF光刻胶的研发与生产。",
+          "dataPoints": [],
+          "rawText": "南大光电：#半导体光刻胶产品 #国产替代 通过控股子公司专注ArF光刻胶的研发与生产。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "容大感光",
+      "code": "300576",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_容大感光_20",
+          "stockId": "s_容大感光",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "容大感光 - 光刻胶相关业务",
+          "content": "在半导体用g/i线光刻胶上已量产，并积极研发ArF光刻胶。",
+          "logic": "在半导体用g/i线光刻胶上已量产，并积极研发ArF光刻胶。",
+          "dataPoints": [],
+          "rawText": "容大感光：#半导体光刻胶产品 #国产替代 在半导体用g/i线光刻胶上已量产，并积极研发ArF光刻胶。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "上海新阳",
+      "code": "300236",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_上海新阳_21",
+          "stockId": "s_上海新阳",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "上海新阳 - 光刻胶相关业务",
+          "content": "产品已获得收入，在高端光刻胶领域持续投入。",
+          "logic": "产品已获得收入，在高端光刻胶领域持续投入。",
+          "dataPoints": [],
+          "rawText": "上海新阳：#半导体光刻胶产品 #国产替代 产品已获得收入，在高端光刻胶领域持续投入。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "晶瑞新材",
+      "code": "300655",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_晶瑞新材_22",
+          "stockId": "s_晶瑞新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "晶瑞新材 - 光刻胶相关业务",
+          "content": "KrF光刻胶量产并实现数倍增长，ArF光刻胶小批量出货。",
+          "logic": "KrF光刻胶量产并实现数倍增长，ArF光刻胶小批量出货。",
+          "dataPoints": [],
+          "rawText": "晶瑞新材：#半导体光刻胶产品 #国产替代 KrF光刻胶量产并实现数倍增长，ArF光刻胶小批量出货。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "飞凯材料",
+      "code": "300398",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_飞凯材料_23",
+          "stockId": "s_飞凯材料",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "飞凯材料 - 光刻胶相关业务",
+          "content": "应用于半导体领域的i-line光刻胶及KrF光刻配套Barc材料光刻胶。",
+          "logic": "应用于半导体领域的i-line光刻胶及KrF光刻配套Barc材料光刻胶。",
+          "dataPoints": [],
+          "rawText": "飞凯材料：#半导体光刻胶产品 #国产替代 应用于半导体领域的i-line光刻胶及KrF光刻配套Barc材料光刻胶。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "艾森股份",
+      "code": "688526",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_艾森股份_24",
+          "stockId": "s_艾森股份",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "艾森股份 - 光刻胶相关业务",
+          "content": "产品涵盖电镀液及配套试剂、光刻胶及配套试剂等。",
+          "logic": "产品涵盖电镀液及配套试剂、光刻胶及配套试剂等。",
+          "dataPoints": [],
+          "rawText": "艾森股份：#半导体光刻胶产品 #国产替代 产品涵盖电镀液及配套试剂、光刻胶及配套试剂等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "高盟新材",
+      "code": "300200",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_高盟新材_25",
+          "stockId": "s_高盟新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "高盟新材 - 光刻胶相关业务",
+          "content": "参股的公司KrF/ArF 已供货中芯国际等头部晶圆厂。",
+          "logic": "参股的公司KrF/ArF 已供货中芯国际等头部晶圆厂。",
+          "dataPoints": [],
+          "rawText": "高盟新材：#半导体光刻胶产品 #国产替代 参股的公司KrF/ArF 已供货中芯国际等头部晶圆厂。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "雅克科技",
+      "code": "002409",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_雅克科技_26",
+          "stockId": "s_雅克科技",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "雅克科技 - 光刻胶相关业务",
+          "content": "产品涵盖光刻胶及配套试剂、电子特种气体等。",
+          "logic": "产品涵盖光刻胶及配套试剂、电子特种气体等。",
+          "dataPoints": [],
+          "rawText": "雅克科技：#半导体光刻胶产品 #国产替代 产品涵盖光刻胶及配套试剂、电子特种气体等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "恒坤新材",
+      "code": "688283",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_恒坤新材_27",
+          "stockId": "s_恒坤新材",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "恒坤新材 - 光刻胶相关业务",
+          "content": "产品有光刻胶如Krf光刻胶、I-line光刻胶、Arf光刻胶等。",
+          "logic": "产品有光刻胶如Krf光刻胶、I-line光刻胶、Arf光刻胶等。",
+          "dataPoints": [],
+          "rawText": "恒坤新材：#半导体光刻胶产品 #国产替代 产品有光刻胶如Krf光刻胶、I-line光刻胶、Arf光刻胶等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "华特气体",
+      "code": "688268",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_华特气体_28",
+          "stockId": "s_华特气体",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "华特气体 - 光刻胶相关业务",
+          "content": "光刻气产品包括A/F/Ne、G/e、Ar/Ne和K/任F/Ne混合气等。",
+          "logic": "光刻气产品包括A/F/Ne、G/e、Ar/Ne和K/任F/Ne混合气等。",
+          "dataPoints": [],
+          "rawText": "华特气体：#半导体光刻胶产品 #国产替代 光刻气产品包括A/F/Ne、G/e、Ar/Ne和K/任F/Ne混合气等。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    },
+    {
+      "name": "凯美特气",
+      "code": "002549",
+      "concepts": ["半导体光刻胶", "国产替代"],
+      "sector": "半导体材料",
+      "targetValuation": "",
+      "earningsForecast": "",
+      "records": [
+        {
+          "id": "rec_凯美特气_29",
+          "stockId": "s_凯美特气",
+          "timestamp": "2026-03-10",
+          "customDate": "2026-03-10",
+          "title": "凯美特气 - 光刻胶相关业务",
+          "content": "超高纯气体和光刻气产品具有较高的品质。",
+          "logic": "超高纯气体和光刻气产品具有较高的品质。",
+          "dataPoints": [],
+          "rawText": "凯美特气：#半导体光刻胶产品 #国产替代 超高纯气体和光刻气产品具有较高的品质。"
+        }
+      ],
+      "price": "---",
+      "dailyChange": "0%",
+      "marketCap": "---",
+      "peRatio": "---",
+      "revenue": "---",
+      "products": [],
+      "lastUpdated": "2026-03-10"
+    }
+  ],
+  "exportedAt": "2026-03-10",
+  "date": "2026-03-10"
+}

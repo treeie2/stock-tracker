@@ -9,13 +9,7 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        proxy: {
-          '/api': {
-            target: 'https://ark.cn-beijing.volces.com',
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, '')
-          }
-        }
+        // 移除API代理，让API请求直接访问本地服务器
       },
       plugins: [react()],
       define: {
