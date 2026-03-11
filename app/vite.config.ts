@@ -9,7 +9,13 @@ export default defineConfig(({ mode }) => {
       server: {
         port: 3000,
         host: '0.0.0.0',
-        // 移除API代理，让API请求直接访问本地服务器
+        proxy: {
+          '/api': {
+            target: 'http://localhost:3002',
+            changeOrigin: true,
+            rewrite: (path) => path
+          }
+        }
       },
       plugins: [react()],
       define: {

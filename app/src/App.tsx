@@ -33,7 +33,8 @@ import {
   Bot,
   ArrowDown,
   ArrowUp,
-  ExternalLink
+  ExternalLink,
+  Package
 } from 'lucide-react';
 import type { Stock, AnalysisRecord, ExtractedInfo } from './types/index';
 import { ViewMode } from './types/index';
@@ -41,6 +42,7 @@ import { extractStockInfoFromText } from './geminiService';
 import { fetchStockPrice } from './tushareService';
 import { parseLocalStockFile } from './localFileParser';
 import { saveToIndexedDb, loadFromIndexedDb, saveHistoryToIndexedDb } from './storageService';
+import { saveToCloud, loadFromCloud } from './cloudStorageService';
 
 interface SystemLog {
   id: string;
@@ -170,11 +172,31 @@ const App: React.FC = () => {
       try {
         console.log('开始加载数据...');
 
-        // 检查localStorage是否有数据
+        // 优先从云端加载数据
+        try {
+          console.log('尝试从云端加载数据...');
+          const cloudData = await loadFromCloud();
+          
+          if (cloudData.length > 0) {
+            console.log('从云端加载数据成功:', { count: cloudData.length });
+            setStocks(cloudData);
+            addLog('从云端加载数据成功', 'success', { count: cloudData.length });
+
+            // 同时保存到本地存储
+            localStorage.setItem('stock_tracker_db_v4_final', JSON.stringify(cloudData));
+            await saveToIndexedDb(cloudData);
+            addLog('数据已同步到本地存储', 'info');
+            return;
+          }
+        } catch (cloudError) {
+          console.log('云端加载失败，尝试本地存储:', cloudError);
+          addLog('云端加载失败，使用本地存储', 'warning');
+        }
+
+        // 如果云端没有数据，尝试从本地存储加载
         const localStorageData = localStorage.getItem('stock_tracker_db_v4_final');
         console.log('localStorage数据存在:', !!localStorageData);
 
-        // 优先从localStorage加载（更可靠）
         if (localStorageData) {
           console.log('从localStorage加载数据...');
           const parsedData = JSON.parse(localStorageData);
@@ -201,7 +223,7 @@ const App: React.FC = () => {
             localStorage.setItem('stock_tracker_db_v4_final', JSON.stringify(indexedDbData));
             addLog('数据已同步到localStorage', 'info');
           } else {
-            console.log('localStorage和IndexedDB都没有数据');
+            console.log('所有存储位置都没有数据');
           }
         }
       } catch (error: any) {
@@ -231,8 +253,9 @@ const App: React.FC = () => {
       s.name.toLowerCase().includes(q) ||
       s.code.includes(q) ||
       s.sector.toLowerCase().includes(q) ||
-      s.concepts.some(c => c.toLowerCase().includes(q)) ||
-      s.records.some(r => (r.content || r.logic || r.title || '').toLowerCase().includes(q))
+      (s.concepts || []).some(c => c.toLowerCase().includes(q)) ||
+      (s.products || []).some(p => p.toLowerCase().includes(q)) ||
+      (s.records || []).some(r => (r.content || r.logic || r.title || '').toLowerCase().includes(q))
     );
   }, [stocks, searchQuery]);
 
@@ -444,6 +467,7 @@ const App: React.FC = () => {
             ...newStocks[idx],
             sector: info.sector || newStocks[idx].sector,
             concepts: [...new Set([...(info.concepts || []), ...newStocks[idx].concepts])],
+            products: [...new Set([...(info.products || []), ...(newStocks[idx].products || [])])],
             targetValuation: info.targetValuation || newStocks[idx].targetValuation,
             earningsForecast: info.earningsForecast || newStocks[idx].earningsForecast,
             lastUpdated: new Date().toLocaleString(),
@@ -464,7 +488,7 @@ const App: React.FC = () => {
             peRatio: info.peRatio || '---',
             revenue: '---',
             concepts: info.concepts || [],
-            products: [],
+            products: info.products || [],
             sector: info.sector || '未分类',
             targetValuation: info.targetValuation || '',
             earningsForecast: info.earningsForecast || '',
@@ -632,6 +656,13 @@ const App: React.FC = () => {
     addLog(`已导出 ${date} 的数据`, "success");
   };
 
+  // 处理产品点击事件，搜索相关个股
+  const handleProductClick = (product: string) => {
+    setSearchQuery(product);
+    setViewMode(ViewMode.DASHBOARD);
+    addLog(`正在搜索生产"${product}"的个股`, "info");
+  };
+
   // 手动保存数据
   const handleSave = async () => {
     try {
@@ -640,6 +671,16 @@ const App: React.FC = () => {
 
       // 保存到IndexedDB
       await saveToIndexedDb(stocks);
+
+      // 保存到云端
+      try {
+        console.log('正在保存数据到云端...');
+        await saveToCloud(stocks);
+        addLog('数据已成功保存到云端', 'success');
+      } catch (cloudError) {
+        console.error('云端保存失败:', cloudError);
+        addLog('云端保存失败，仅保存到本地', 'warning');
+      }
 
       // 按日期保存数据
       const todayDate = getTodayDate();
@@ -752,6 +793,13 @@ const App: React.FC = () => {
                   existing.concepts = Array.from(existingConcepts);
                 }
                 
+                // 合并主营产品
+                if (newStock.products && newStock.products.length > 0) {
+                  const existingProducts = new Set(existing.products || []);
+                  newStock.products.forEach(p => existingProducts.add(p));
+                  existing.products = Array.from(existingProducts);
+                }
+                
                 // 更新其他字段（取非空值）
                 const fields = ['sector', 'targetValuation', 'earningsForecast', 'price', 'marketCap', 'peRatio'];
                 fields.forEach(field => {
@@ -760,8 +808,13 @@ const App: React.FC = () => {
                   }
                 });
               } else {
-                // 不存在，直接添加
-                stockMap.set(key, { ...newStock, records: [...(newStock.records || [])] });
+                // 不存在，直接添加，确保products字段存在
+                const stockToAdd = {
+                  ...newStock,
+                  products: newStock.products || [],
+                  records: [...(newStock.records || [])]
+                };
+                stockMap.set(key, stockToAdd);
               }
             });
             
@@ -770,13 +823,29 @@ const App: React.FC = () => {
             const duplicateCount = data.stocks.length + stocks.length - mergedStocks.length;
             addLog(`成功导入并合并 ${data.stocks.length} 条数据，合并了 ${duplicateCount} 条重复记录`, "success");
           } else {
-            // 覆盖模式
-            setStocks(data.stocks);
+            // 覆盖模式，确保每个股票都有products字段
+            const stocksWithProducts = data.stocks.map((stock: any) => ({
+              ...stock,
+              products: stock.products || []
+            }));
+            setStocks(stocksWithProducts);
             addLog(`成功导入 ${data.stocks.length} 条数据（覆盖模式）`, "success");
           }
           
           setShowToast(true);
           setTimeout(() => setShowToast(false), 3000);
+          
+          // 自动保存到云端
+          setTimeout(async () => {
+            try {
+              console.log('正在自动保存导入的数据到云端...');
+              await saveToCloud(stocks.length > 0 ? stocks : data.stocks);
+              addLog('导入的数据已自动保存到云端', 'success');
+            } catch (cloudError) {
+              console.error('自动保存到云端失败:', cloudError);
+              addLog('自动保存到云端失败，数据已保存到本地', 'warning');
+            }
+          }, 1000);
         } else if (Array.isArray(data)) {
           // 处理爬虫抓取的数组格式 -> 转入研报录入流程
           const extracted = parseLocalStockFile(text);
@@ -989,6 +1058,8 @@ const App: React.FC = () => {
     sector: string;
     targetValuation: string;
     latestLogic: string;
+    concepts: string[];
+    products: string[];
   } | null>(null);
 
   const startEditing = () => {
@@ -998,7 +1069,9 @@ const App: React.FC = () => {
       code: currentStock.code,
       sector: currentStock.sector,
       targetValuation: currentStock.targetValuation || '',
-      latestLogic: currentStock.records[0]?.logic || ''
+      latestLogic: currentStock.records[0]?.logic || '',
+      concepts: currentStock.concepts || [],
+      products: currentStock.products || []
     });
     setIsEditing(true);
   };
@@ -1035,6 +1108,8 @@ const App: React.FC = () => {
           code: editForm.code,
           sector: editForm.sector,
           targetValuation: editForm.targetValuation,
+          concepts: editForm.concepts,
+          products: editForm.products,
           records: newRecords,
           lastUpdated: new Date().toLocaleString()
         };
@@ -1845,11 +1920,103 @@ const App: React.FC = () => {
                   <span className="flex items-center gap-2 text-[10px] text-slate-400 font-black uppercase tracking-widest">
                     <Tag className="w-4 h-4 text-indigo-500" /> Alpha Concepts
                   </span>
-                  <div className="flex flex-wrap gap-2">
-                    {currentStock.concepts && currentStock.concepts.length > 0 ? currentStock.concepts.map(c => (
-                      <span key={c} className="text-[10px] font-black text-indigo-600 bg-white border border-indigo-100 px-3 py-1.5 rounded-xl shadow-sm hover:scale-105 transition-transform cursor-default">#{c}</span>
-                    )) : <span className="text-slate-300 text-xs italic font-medium">未定义概念</span>}
-                  </div>
+                  {isEditing && editForm ? (
+                    <div className="space-y-4">
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="添加新概念"
+                          className="flex-1 text-sm text-slate-600 font-medium bg-white p-3 rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                          onKeyPress={(e) => {
+                            if (e.key === 'Enter' && e.currentTarget.value.trim()) {
+                              setEditForm({
+                                ...editForm,
+                                concepts: [...editForm.concepts, e.currentTarget.value.trim()]
+                              });
+                              e.currentTarget.value = '';
+                            }
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {editForm.concepts.map((c, index) => (
+                          <span key={index} className="text-[10px] font-black text-indigo-600 bg-white border border-indigo-100 px-3 py-1.5 rounded-xl shadow-sm hover:scale-105 transition-transform flex items-center gap-1">
+                            #{c}
+                            <button
+                              onClick={() => {
+                                const newConcepts = [...editForm.concepts];
+                                newConcepts.splice(index, 1);
+                                setEditForm({ ...editForm, concepts: newConcepts });
+                              }}
+                              className="w-3 h-3 text-rose-500 hover:text-rose-600 transition-colors"
+                            >×</button>
+                          </span>
+                        ))}
+                        {editForm.concepts.length === 0 && (
+                          <span className="text-slate-300 text-xs italic font-medium">未定义概念</span>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-2">
+                      {currentStock.concepts && currentStock.concepts.length > 0 ? currentStock.concepts.map(c => (
+                        <span key={c} className="text-[10px] font-black text-indigo-600 bg-white border border-indigo-100 px-3 py-1.5 rounded-xl shadow-sm hover:scale-105 transition-transform cursor-default">#{c}</span>
+                      )) : <span className="text-slate-300 text-xs italic font-medium">未定义概念</span>}
+                    </div>
+                  )}
+                </div>
+                <div className="space-y-3">
+                  <span className="flex items-center gap-2 text-[10px] text-slate-400 font-black uppercase tracking-widest">
+                    <Package className="w-4 h-4 text-emerald-500" /> 主营产品
+                  </span>
+                  {isEditing && editForm ? (
+                    <div className="space-y-4">
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          placeholder="添加新产品"
+                          className="flex-1 text-sm text-slate-600 font-medium bg-white p-3 rounded-xl border-2 border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 outline-none transition-all"
+                          onKeyPress={(e) => {
+                            if (e.key === 'Enter' && e.currentTarget.value.trim()) {
+                              setEditForm({
+                                ...editForm,
+                                products: [...editForm.products, e.currentTarget.value.trim()]
+                              });
+                              e.currentTarget.value = '';
+                            }
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {editForm.products.map((p, index) => (
+                          <span key={index} className="text-[10px] font-black text-emerald-600 bg-white border border-emerald-100 px-3 py-1.5 rounded-xl shadow-sm hover:scale-105 transition-transform flex items-center gap-1">
+                            {p}
+                            <button
+                              onClick={() => {
+                                const newProducts = [...editForm.products];
+                                newProducts.splice(index, 1);
+                                setEditForm({ ...editForm, products: newProducts });
+                              }}
+                              className="w-3 h-3 text-rose-500 hover:text-rose-600 transition-colors"
+                            >×</button>
+                          </span>
+                        ))}
+                        {editForm.products.length === 0 && (
+                          <span className="text-slate-300 text-xs italic font-medium">未定义主营产品</span>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap gap-2">
+                      {currentStock.products && currentStock.products.length > 0 ? currentStock.products.map(p => (
+                        <span 
+                          key={p} 
+                          className="text-[10px] font-black text-emerald-600 bg-white border border-emerald-100 px-3 py-1.5 rounded-xl shadow-sm hover:scale-105 transition-transform cursor-pointer hover:bg-emerald-50"
+                          onClick={() => handleProductClick(p)}
+                        >{p}</span>
+                      )) : <span className="text-slate-300 text-xs italic font-medium">未定义主营产品</span>}
+                    </div>
+                  )}
                 </div>
               </div>
 
