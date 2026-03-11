@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   FilePlus,
   Search,
@@ -57,6 +58,8 @@ interface SystemLog {
 
 const App: React.FC = () => {
   // 1. 状态管理
+  const location = useLocation();
+  const navigate = useNavigate();
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -69,6 +72,26 @@ const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.DASHBOARD);
   const [selectedStockId, setSelectedStockId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // 监听URL变化，设置对应的viewMode
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/price-monitor') {
+      setViewMode(ViewMode.PRICE_MONITOR);
+    } else if (path === '/import') {
+      setViewMode(ViewMode.IMPORT);
+    } else if (path.startsWith('/detail/')) {
+      const stockId = path.split('/').pop();
+      if (stockId) {
+        setSelectedStockId(stockId);
+        setViewMode(ViewMode.DETAIL);
+      } else {
+        setViewMode(ViewMode.DASHBOARD);
+      }
+    } else {
+      setViewMode(ViewMode.DASHBOARD);
+    }
+  }, [location.pathname]);
 
   const [isExtracting, setIsExtracting] = useState(false);
   const [importText, setImportText] = useState('');
@@ -1236,7 +1259,7 @@ const App: React.FC = () => {
             <button onClick={() => deletePendingStocks()} className="bg-amber-500 text-white px-4 py-2.5 rounded-xl flex items-center gap-2 hover:bg-amber-600 font-bold text-sm shadow-lg shadow-amber-100 transition-all active:scale-95">
               <Trash2 className="w-4 h-4" /> 删除待补充
             </button>
-            <button onClick={() => setViewMode(ViewMode.IMPORT)} className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 hover:bg-indigo-700 font-bold text-sm shadow-lg shadow-indigo-100 transition-all active:scale-95">
+            <button onClick={() => navigate('/import')} className="bg-indigo-600 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 hover:bg-indigo-700 font-bold text-sm shadow-lg shadow-indigo-100 transition-all active:scale-95">
               <FilePlus className="w-4 h-4" /> 研报录入
             </button>
             <button onClick={() => showHistoryData()} className="bg-slate-700 text-white px-4 py-2.5 rounded-xl flex items-center gap-2 hover:bg-slate-800 font-bold text-sm shadow-lg shadow-slate-200 transition-all active:scale-95">
@@ -1682,7 +1705,7 @@ const App: React.FC = () => {
   const renderImport = () => (
     <div className="max-w-4xl mx-auto px-6 py-8 space-y-6 animate-in slide-in-from-bottom-5 duration-500">
       <div className="flex items-center justify-between">
-        <button onClick={() => setViewMode(ViewMode.DASHBOARD)} className="flex items-center text-slate-500 hover:text-indigo-600 gap-1 font-bold transition-colors">
+        <button onClick={() => navigate('/')} className="flex items-center text-slate-500 hover:text-indigo-600 gap-1 font-bold transition-colors">
           <ChevronLeft className="w-5 h-5" /> 取消并返回看板
         </button>
         <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
@@ -1823,7 +1846,7 @@ const App: React.FC = () => {
       return (
         <div className="max-w-[1400px] mx-auto px-6 py-8 space-y-10 animate-in fade-in duration-500 pb-40">
           <div className="flex items-center justify-between">
-            <button onClick={() => setViewMode(ViewMode.DASHBOARD)} className="flex items-center text-slate-500 hover:text-indigo-600 gap-1 font-bold transition-colors">
+            <button onClick={() => navigate('/')} className="flex items-center text-slate-500 hover:text-indigo-600 gap-1 font-bold transition-colors">
               <ChevronLeft className="w-5 h-5" /> 返回资产看板
             </button>
           </div>
@@ -1833,7 +1856,7 @@ const App: React.FC = () => {
               <h2 className="text-2xl font-black text-slate-900">无法加载股票详情</h2>
               <p className="text-slate-400">所选股票数据可能已被删除或不存在。</p>
               <button
-                onClick={() => setViewMode(ViewMode.DASHBOARD)}
+                onClick={() => navigate('/')}
                 className="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors"
               >
                 返回资产看板
@@ -1848,7 +1871,7 @@ const App: React.FC = () => {
     return (
       <div className="max-w-[1400px] mx-auto px-6 py-8 space-y-10 animate-in fade-in duration-500 pb-40">
         <div className="flex items-center justify-between">
-          <button onClick={() => setViewMode(ViewMode.DASHBOARD)} className="flex items-center text-slate-500 hover:text-indigo-600 gap-1 font-bold transition-colors">
+          <button onClick={() => navigate('/')} className="flex items-center text-slate-500 hover:text-indigo-600 gap-1 font-bold transition-colors">
             <ChevronLeft className="w-5 h-5" /> 返回资产看板
           </button>
 
@@ -2142,7 +2165,7 @@ const App: React.FC = () => {
     <div className="min-h-screen pb-32 bg-slate-50/50">
       <nav className="h-20 bg-white/80 backdrop-blur-2xl border-b border-slate-100 sticky top-0 z-[60] shadow-sm">
         <div className="max-w-[1600px] mx-auto h-full px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setViewMode(ViewMode.DASHBOARD)}>
+          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate('/')}>
             <div className="w-11 h-11 bg-indigo-600 rounded-[1rem] flex items-center justify-center shadow-xl shadow-indigo-100 group-hover:scale-105 transition-all group-hover:rotate-3">
               <BarChart3 className="w-6 h-6 text-white" />
             </div>
@@ -2150,7 +2173,7 @@ const App: React.FC = () => {
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setViewMode(ViewMode.PRICE_MONITOR)}
+              onClick={() => navigate('/price-monitor')}
               className={`flex items-center gap-2 px-4 py-2 rounded-2xl font-bold text-sm transition-all ${
                 viewMode === ViewMode.PRICE_MONITOR
                   ? 'bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-lg shadow-rose-500/20'
