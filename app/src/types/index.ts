@@ -38,7 +38,8 @@ export interface DataPoint {
 export const ViewMode = {
   DASHBOARD: 'DASHBOARD',
   IMPORT: 'IMPORT',
-  DETAIL: 'DETAIL'
+  DETAIL: 'DETAIL',
+  PRICE_MONITOR: 'PRICE_MONITOR'
 } as const;
 
 export type ViewMode = typeof ViewMode[keyof typeof ViewMode];

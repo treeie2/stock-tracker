@@ -34,10 +34,13 @@ import {
   ArrowDown,
   ArrowUp,
   ExternalLink,
-  Package
+  Package,
+  TrendingUp as PriceIcon
 } from 'lucide-react';
 import type { Stock, AnalysisRecord, ExtractedInfo } from './types/index';
 import { ViewMode } from './types/index';
+import type { PriceIncreaseConcept } from './types/priceMonitor';
+import PriceMonitor from './components/PriceMonitor';
 import { extractStockInfoFromText } from './geminiService';
 import { fetchStockPrice } from './tushareService';
 import { parseLocalStockFile } from './localFileParser';
@@ -101,6 +104,9 @@ const App: React.FC = () => {
   const [jsonLibrarySortOrder, setJsonLibrarySortOrder] = useState<'asc' | 'desc'>('desc');
   const [expandedArticleId, setExpandedArticleId] = useState<string | null>(null);
   const [selectedArticles, setSelectedArticles] = useState<Set<string>>(new Set());
+
+  // 涨价监控数据
+  const [priceMonitorConcepts, setPriceMonitorConcepts] = useState<PriceIncreaseConcept[]>([]);
 
   const addLog = (message: string, type: SystemLog['type'] = 'info', detail?: any) => {
     const newLog: SystemLog = {
@@ -166,6 +172,14 @@ const App: React.FC = () => {
     }
   }, [stocks]);
 
+  // 涨价监控数据持久化
+  useEffect(() => {
+    if (priceMonitorConcepts.length > 0) {
+      localStorage.setItem('price_monitor_concepts', JSON.stringify(priceMonitorConcepts));
+      addLog('涨价监控数据已保存', 'info');
+    }
+  }, [priceMonitorConcepts]);
+
   // 加载数据
   useEffect(() => {
     const loadData = async () => {
@@ -225,6 +239,13 @@ const App: React.FC = () => {
           } else {
             console.log('所有存储位置都没有数据');
           }
+        }
+
+        // 加载涨价监控数据
+        const priceMonitorData = localStorage.getItem('price_monitor_concepts');
+        if (priceMonitorData) {
+          setPriceMonitorConcepts(JSON.parse(priceMonitorData));
+          addLog('加载涨价监控数据成功', 'success');
         }
       } catch (error: any) {
         console.error('加载数据失败:', error);
@@ -661,6 +682,35 @@ const App: React.FC = () => {
     setSearchQuery(product);
     setViewMode(ViewMode.DASHBOARD);
     addLog(`正在搜索生产"${product}"的个股`, "info");
+  };
+
+  // 涨价监控处理函数
+  const handlePriceMonitorImport = (newConcepts: PriceIncreaseConcept[]) => {
+    setPriceMonitorConcepts(prev => [...prev, ...newConcepts]);
+    addLog(`成功导入 ${newConcepts.length} 个涨价概念`, "success");
+  };
+
+  const handlePriceMonitorExport = () => {
+    // 导出逻辑在 PriceMonitor 组件中处理
+    addLog("导出涨价监控数据", "info");
+  };
+
+  const handlePriceMonitorDelete = (id: string) => {
+    setPriceMonitorConcepts(prev => prev.filter(c => c.id !== id));
+    addLog("已删除涨价概念", "success");
+  };
+
+  const handlePriceMonitorUpdate = (concept: PriceIncreaseConcept) => {
+    setPriceMonitorConcepts(prev => {
+      const idx = prev.findIndex(c => c.id === concept.id);
+      if (idx >= 0) {
+        const updated = [...prev];
+        updated[idx] = concept;
+        return updated;
+      }
+      return [...prev, concept];
+    });
+    addLog(`已${priceMonitorConcepts.find(c => c.id === concept.id) ? '更新' : '添加'}涨价概念: ${concept.name}`, "success");
   };
 
   // 手动保存数据
@@ -2099,6 +2149,16 @@ const App: React.FC = () => {
             <span className="font-black text-slate-900 text-xl tracking-tighter uppercase italic">ALPHA<span className="text-indigo-600">RESEARCH</span></span>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setViewMode(ViewMode.PRICE_MONITOR)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-2xl font-bold text-sm transition-all ${
+                viewMode === ViewMode.PRICE_MONITOR
+                  ? 'bg-gradient-to-r from-rose-500 to-orange-500 text-white shadow-lg shadow-rose-500/20'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              <PriceIcon className="w-4 h-4" /> 涨价监控
+            </button>
             <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-100 rounded-2xl">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Market Engine Active</span>
@@ -2111,6 +2171,15 @@ const App: React.FC = () => {
         {viewMode === ViewMode.DASHBOARD && renderDashboard()}
         {viewMode === ViewMode.IMPORT && renderImport()}
         {viewMode === ViewMode.DETAIL && renderDetail()}
+        {viewMode === ViewMode.PRICE_MONITOR && (
+          <PriceMonitor
+            concepts={priceMonitorConcepts}
+            onImport={handlePriceMonitorImport}
+            onExport={handlePriceMonitorExport}
+            onDelete={handlePriceMonitorDelete}
+            onUpdate={handlePriceMonitorUpdate}
+          />
+        )}
       </main>
 
       {/* 提示组件 */}
