@@ -146,49 +146,82 @@ const App: React.FC = () => {
   useEffect(() => {
     if (stocks.length > 0) {
       console.log('数据发生变化，开始保存...', { stockCount: stocks.length });
-      // 保存到localStorage
-      console.log('保存到localStorage...');
-      localStorage.setItem('stock_tracker_db_v4_final', JSON.stringify(stocks));
-      console.log('localStorage保存成功');
+      
+      try {
+        // 保存到localStorage
+        console.log('保存到localStorage...');
+        const stocksJson = JSON.stringify(stocks);
+        const dataSize = new Blob([stocksJson]).size;
+        const sizeInMB = (dataSize / 1024 / 1024).toFixed(2);
+        console.log(`数据大小: ${sizeInMB} MB`);
+        
+        if (dataSize > 5 * 1024 * 1024) { // 超过5MB
+          console.warn('数据大小超过localStorage限制，仅保存到IndexedDB');
+          addLog(`警告: 数据大小 ${sizeInMB} MB，超过localStorage限制，仅保存到IndexedDB`, 'warning');
+        } else {
+          localStorage.setItem('stock_tracker_db_v4_final', stocksJson);
+          console.log('localStorage保存成功');
+        }
 
-      // 保存到IndexedDB
-      console.log('保存到IndexedDB...');
-      saveToIndexedDb(stocks).then(() => {
-        console.log('IndexedDB保存成功');
-        addLog('数据已同步到IndexedDB', 'info');
-      }).catch(error => {
-        console.error('IndexedDB保存失败:', error);
-        addLog(`同步到IndexedDB失败: ${error}`, 'warning');
-      });
+        // 保存到IndexedDB
+        console.log('保存到IndexedDB...');
+        saveToIndexedDb(stocks).then(() => {
+          console.log('IndexedDB保存成功');
+          addLog('数据已同步到IndexedDB', 'info');
+        }).catch(error => {
+          console.error('IndexedDB保存失败:', error);
+          addLog(`同步到IndexedDB失败: ${error}`, 'warning');
+        });
 
-      // 按日期保存数据，确保今天的处理结果被单独保存
-      const todayDate = getTodayDate();
-      const todayStockData = {
-        stocks: stocks,
-        updatedAt: new Date().toISOString(),
-        changes: stocks.length // 可以根据需要添加更详细的变更信息
-      };
-      console.log('保存今天的数据到localStorage...');
-      localStorage.setItem(`stock_tracker_db_${todayDate}`, JSON.stringify(todayStockData));
-      console.log('今天的数据保存成功');
+        // 按日期保存数据，确保今天的处理结果被单独保存
+        const todayDate = getTodayDate();
+        const todayStockData = {
+          stocks: stocks,
+          updatedAt: new Date().toISOString(),
+          changes: stocks.length // 可以根据需要添加更详细的变更信息
+        };
+        console.log('保存今天的数据到localStorage...');
+        const todayDataJson = JSON.stringify(todayStockData);
+        const todayDataSize = new Blob([todayDataJson]).size;
+        
+        if (todayDataSize <= 5 * 1024 * 1024) {
+          localStorage.setItem(`stock_tracker_db_${todayDate}`, todayDataJson);
+          console.log('今天的数据保存成功');
+        } else {
+          console.warn('今天的数据超过localStorage限制，仅保存到IndexedDB');
+        }
 
-      // 保存历史数据到IndexedDB
-      console.log('保存历史数据到IndexedDB...');
-      saveHistoryToIndexedDb(todayDate, todayStockData).then(() => {
-        console.log('历史数据IndexedDB保存成功');
-        addLog(`历史数据已同步到IndexedDB (${todayDate})`, 'info');
-      }).catch(error => {
-        console.error('历史数据IndexedDB保存失败:', error);
-        addLog(`同步历史数据到IndexedDB失败: ${error}`, 'warning');
-      });
+        // 保存历史数据到IndexedDB
+        console.log('保存历史数据到IndexedDB...');
+        saveHistoryToIndexedDb(todayDate, todayStockData).then(() => {
+          console.log('历史数据IndexedDB保存成功');
+          addLog(`历史数据已同步到IndexedDB (${todayDate})`, 'info');
+        }).catch(error => {
+          console.error('历史数据IndexedDB保存失败:', error);
+          addLog(`同步历史数据到IndexedDB失败: ${error}`, 'warning');
+        });
 
-      // 保存日期索引，用于快速访问历史数据
-      const dateIndex = JSON.parse(localStorage.getItem('stock_tracker_date_index') || '[]');
-      if (!dateIndex.includes(todayDate)) {
-        dateIndex.push(todayDate);
-        dateIndex.sort((a: string, b: string) => b.localeCompare(a)); // 按日期降序排序
-        localStorage.setItem('stock_tracker_date_index', JSON.stringify(dateIndex));
-        console.log('日期索引保存成功');
+        // 保存日期索引，用于快速访问历史数据
+        try {
+          const dateIndex = JSON.parse(localStorage.getItem('stock_tracker_date_index') || '[]');
+          if (!dateIndex.includes(todayDate)) {
+            dateIndex.push(todayDate);
+            dateIndex.sort((a: string, b: string) => b.localeCompare(a)); // 按日期降序排序
+            localStorage.setItem('stock_tracker_date_index', JSON.stringify(dateIndex));
+            console.log('日期索引保存成功');
+          }
+        } catch (indexError) {
+          console.error('保存日期索引失败:', indexError);
+          // 重置日期索引
+          localStorage.setItem('stock_tracker_date_index', JSON.stringify([todayDate]));
+        }
+      } catch (saveError) {
+        console.error('数据保存失败:', saveError);
+        addLog(`数据保存失败: ${saveError}`, 'error');
+        // 即使localStorage失败，也要尝试保存到IndexedDB
+        saveToIndexedDb(stocks).catch(error => {
+          console.error('IndexedDB保存也失败:', error);
+        });
       }
     } else {
       console.log('没有数据需要保存');
@@ -231,44 +264,80 @@ const App: React.FC = () => {
         }
 
         // 如果云端没有数据，尝试从本地存储加载
+        let loadedData: Stock[] = [];
         const localStorageData = localStorage.getItem('stock_tracker_db_v4_final');
         console.log('localStorage数据存在:', !!localStorageData);
 
         if (localStorageData) {
           console.log('从localStorage加载数据...');
-          const parsedData = JSON.parse(localStorageData);
-          console.log('localStorage数据解析成功:', { count: parsedData.length });
-          setStocks(parsedData);
-          addLog('从localStorage加载数据成功', 'success', { count: parsedData.length });
+          try {
+            const parsedData = JSON.parse(localStorageData);
+            console.log('localStorage数据解析成功:', { count: parsedData.length });
+            loadedData = parsedData;
+            setStocks(parsedData);
+            addLog('从localStorage加载数据成功', 'success', { count: parsedData.length });
 
-          // 同时保存到IndexedDB
-          console.log('正在将localStorage数据同步到IndexedDB...');
-          await saveToIndexedDb(parsedData);
-          addLog('数据已同步到IndexedDB', 'info');
+            // 检查数据大小
+            const dataSize = new Blob([localStorageData]).size;
+            const sizeInMB = (dataSize / 1024 / 1024).toFixed(2);
+            console.log(`数据大小: ${sizeInMB} MB`);
+            if (dataSize > 4 * 1024 * 1024) { // 超过4MB警告
+              addLog(`警告: 数据大小 ${sizeInMB} MB，接近localStorage存储限制`, 'warning');
+            }
+
+            // 同时保存到IndexedDB
+            console.log('正在将localStorage数据同步到IndexedDB...');
+            await saveToIndexedDb(parsedData);
+            addLog('数据已同步到IndexedDB', 'info');
+          } catch (parseError) {
+            console.error('localStorage数据解析失败:', parseError);
+            addLog('localStorage数据损坏，尝试从IndexedDB恢复', 'error');
+            // 尝试从IndexedDB加载
+            const indexedDbData = await loadFromIndexedDb();
+            if (indexedDbData.length > 0) {
+              loadedData = indexedDbData;
+              setStocks(indexedDbData);
+              addLog('从IndexedDB恢复数据成功', 'success', { count: indexedDbData.length });
+              // 重新保存到localStorage
+              localStorage.setItem('stock_tracker_db_v4_final', JSON.stringify(indexedDbData));
+            }
+          }
         } else {
           // 如果localStorage没有数据，尝试从IndexedDB加载
           console.log('localStorage没有数据，尝试从IndexedDB加载...');
-          const indexedDbData = await loadFromIndexedDb();
+          try {
+            const indexedDbData = await loadFromIndexedDb();
+            if (indexedDbData.length > 0) {
+              loadedData = indexedDbData;
+              setStocks(indexedDbData);
+              addLog('从IndexedDB加载数据成功', 'success', { count: indexedDbData.length });
 
-          if (indexedDbData.length > 0) {
-            console.log('从IndexedDB加载数据成功:', { count: indexedDbData.length });
-            setStocks(indexedDbData);
-            addLog('从IndexedDB加载数据成功', 'success', { count: indexedDbData.length });
-
-            // 同时保存到localStorage
-            console.log('正在将IndexedDB数据同步到localStorage...');
-            localStorage.setItem('stock_tracker_db_v4_final', JSON.stringify(indexedDbData));
-            addLog('数据已同步到localStorage', 'info');
-          } else {
-            console.log('所有存储位置都没有数据');
+              // 同时保存到localStorage
+              console.log('正在将IndexedDB数据同步到localStorage...');
+              const dataStr = JSON.stringify(indexedDbData);
+              localStorage.setItem('stock_tracker_db_v4_final', dataStr);
+              addLog('数据已同步到localStorage', 'info');
+            } else {
+              console.log('所有存储位置都没有数据');
+            }
+          } catch (dbError) {
+            console.error('IndexedDB加载失败:', dbError);
+            addLog('IndexedDB加载失败', 'error');
           }
         }
 
         // 加载涨价监控数据
         const priceMonitorData = localStorage.getItem('price_monitor_concepts');
         if (priceMonitorData) {
-          setPriceMonitorConcepts(JSON.parse(priceMonitorData));
-          addLog('加载涨价监控数据成功', 'success');
+          try {
+            setPriceMonitorConcepts(JSON.parse(priceMonitorData));
+            addLog('加载涨价监控数据成功', 'success');
+          } catch (parseError) {
+            console.error('涨价监控数据解析失败:', parseError);
+            addLog('涨价监控数据损坏', 'error');
+            // 重置涨价监控数据
+            setPriceMonitorConcepts([]);
+          }
         }
       } catch (error: any) {
         console.error('加载数据失败:', error);
